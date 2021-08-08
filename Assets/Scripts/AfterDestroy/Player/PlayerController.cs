@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
+using AfterDestroy.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AfterDestroy
 {
     public class PlayerController : MonoBehaviour
     {
-        [SerializeField] private Transform playerCamera;
+        [Header("Controll settings")] [SerializeField]
+        private Camera playerCamera;
+
         [SerializeField] private float mouseSensitivity = 3.5f;
         [SerializeField] private bool lookCursor = true;
         [SerializeField] private float walkSpeed = 6f;
@@ -15,7 +20,8 @@ namespace AfterDestroy
         [SerializeField] private AnimationCurve jumpFallOff;
         [SerializeField] private float jumpMultiplier;
         [SerializeField] private float runSpeed;
-        
+
+        //Control settings
         private float _cameraPitch;
         private CharacterController _controller;
         private Vector2 _currentDir = Vector2.zero;
@@ -25,6 +31,20 @@ namespace AfterDestroy
         private float _velocityY;
         private bool _isJumping;
         private float _currentSpeed;
+
+        //Player settings
+        private Ray _ray;
+        private PointImage _pointImage;
+        private bool _isPointImageOn;
+        private string _interactableTag = "Interactable";
+
+        private void OnValidate()
+        {
+            if (_pointImage == null)
+            {
+                _pointImage = FindObjectOfType<PointImage>();
+            }
+        }
 
         public void Init()
         {
@@ -37,10 +57,32 @@ namespace AfterDestroy
             }
         }
 
-        void Update()
+        private void Update()
         {
             UpdateMouseLook();
             UpdateMovement();
+        }
+
+        private void FixedUpdate()
+        {
+            CheckInteractable();
+        }
+
+        private void CheckInteractable()
+        {
+            RaycastHit raycastHit;
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out raycastHit, 100f))
+            {
+                var selection = raycastHit.transform;
+                if (selection.CompareTag(_interactableTag))
+                {
+                    _pointImage.SetOn();
+                }
+                else
+                {
+                    _pointImage.SetOff();
+                }
+            }
         }
 
         private void UpdateMouseLook()
@@ -50,7 +92,7 @@ namespace AfterDestroy
                 mouseSmoothTime);
             _cameraPitch -= _currentMouseDelta.y * mouseSensitivity;
             _cameraPitch = Mathf.Clamp(_cameraPitch, -90.0f, 90.0f);
-            playerCamera.localEulerAngles = Vector3.right * _cameraPitch;
+            playerCamera.transform.localEulerAngles = Vector3.right * _cameraPitch;
             transform.Rotate(Vector3.up * (_currentMouseDelta.x * mouseSensitivity));
         }
 
@@ -71,7 +113,7 @@ namespace AfterDestroy
             Vector3 velocity = (transform.forward * _currentDir.y + transform.right * _currentDir.x) * _currentSpeed +
                                Vector3.up * _velocityY;
             _controller.Move(velocity * Time.deltaTime);
-            
+
             JumpInput();
             ShiftInput();
         }

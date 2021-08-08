@@ -6,18 +6,7 @@ TagManager:
   tags:
   - Item
   - Target
-  - Wood
-  - Concrete
-  - Dirt
-  - Fire
-  - Metal
-  - Crosshair
   - NPC
-  - Flesh
-  - Cover
-  - Terrain
-  - Collision
-  - LootBox
   - Interactable
   layers:
   - Default
