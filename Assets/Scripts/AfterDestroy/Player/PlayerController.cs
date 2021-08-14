@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using AfterDestroy.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace AfterDestroy
+namespace AfterDestroy.Player
 {
     public class PlayerController : MonoBehaviour
     {
@@ -32,19 +30,7 @@ namespace AfterDestroy
         private bool _isJumping;
         private float _currentSpeed;
 
-        //Player settings
-        private Ray _ray;
-        private PointImage _pointImage;
-        private bool _isPointImageOn;
-        private string _interactableTag = "Interactable";
-
-        private void OnValidate()
-        {
-            if (_pointImage == null)
-            {
-                _pointImage = FindObjectOfType<PointImage>();
-            }
-        }
+        
 
         public void Init()
         {
@@ -63,27 +49,7 @@ namespace AfterDestroy
             UpdateMovement();
         }
 
-        private void FixedUpdate()
-        {
-            CheckInteractable();
-        }
-
-        private void CheckInteractable()
-        {
-            RaycastHit raycastHit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out raycastHit, 100f))
-            {
-                var selection = raycastHit.transform;
-                if (selection.CompareTag(_interactableTag))
-                {
-                    _pointImage.SetOn();
-                }
-                else
-                {
-                    _pointImage.SetOff();
-                }
-            }
-        }
+       
 
         private void UpdateMouseLook()
         {
