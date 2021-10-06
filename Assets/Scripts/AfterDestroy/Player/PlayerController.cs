@@ -18,7 +18,7 @@ namespace AfterDestroy.Player
         [SerializeField] private AnimationCurve jumpFallOff;
         [SerializeField] private float jumpMultiplier;
         [SerializeField] private float runSpeed;
-
+        
         //Control settings
         private float _cameraPitch;
         private CharacterController _controller;
@@ -29,9 +29,8 @@ namespace AfterDestroy.Player
         private float _velocityY;
         private bool _isJumping;
         private float _currentSpeed;
-
+        private bool _canMove = true;
         
-
         public void Init()
         {
             _controller = GetComponent<CharacterController>();
@@ -49,7 +48,10 @@ namespace AfterDestroy.Player
             UpdateMovement();
         }
 
-       
+        public void SetPlayerMove(bool isCanMove)
+        {
+            _canMove = isCanMove;
+        }
 
         private void UpdateMouseLook()
         {
@@ -64,6 +66,11 @@ namespace AfterDestroy.Player
 
         private void UpdateMovement()
         {
+            if (_canMove == false)
+            {
+                return;
+            }
+            
             Vector2 targetDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             targetDirection.Normalize();
 

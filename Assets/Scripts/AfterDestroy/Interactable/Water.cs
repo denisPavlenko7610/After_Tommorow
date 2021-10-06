@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AfterDestroy.Interactable
 {
-    public class Water : MonoBehaviour
+    public class Water : MonoBehaviour, IInteractable
     {
         [SerializeField] private GameObject waterPanel;
         private bool _canInteract;
@@ -20,6 +20,21 @@ namespace AfterDestroy.Interactable
         {
             _canInteract = true;
             waterPanel.gameObject.SetActive(true);
+        }
+
+        public Transform GetTransform()
+        {
+            return gameObject.transform;
+        }
+
+        public void SetParent(Transform transform)
+        {
+            gameObject.transform.parent = transform;
+        }
+
+        public void SetPosition(Transform transform)
+        {
+            gameObject.transform.position = transform.position;
         }
     }
 }
