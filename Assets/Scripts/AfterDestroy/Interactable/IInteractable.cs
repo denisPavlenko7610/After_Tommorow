@@ -5,8 +5,13 @@ namespace AfterDestroy.Interactable
     public interface IInteractable
     {
         void Interact();
-        Transform GetTransform();
+
+        void Destroy();
         void SetParent(Transform transform);
         void SetPosition(Transform transform);
+
+        void DisableCanvas();
+
+        void ThrowObject();
     }
 }

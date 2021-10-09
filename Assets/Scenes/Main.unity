@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 100803814}
   - component: {fileID: 100803816}
   - component: {fileID: 100803817}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -671,7 +671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139778080}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Object near camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2058,7 +2058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 175, y: 251}
+  m_AnchoredPosition: {x: 175, y: 352}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &466978222
@@ -9783,25 +9783,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 960314540}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1766750107 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1918357589454920, guid: 9155a26ed8a2b04438c46f09e38c706a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2079561871}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1766750108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766750107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb49973d6330b546bfe95be423ebedc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterPanel: {fileID: 2088157244}
 --- !u!4 &1769982880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 19e3bec5d2084834e86823c680ab9eb1,
@@ -10511,7 +10492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 231, y: -152}
+  m_AnchoredPosition: {x: 231, y: -76}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1918393116
@@ -10628,7 +10609,7 @@ GameObject:
   - component: {fileID: 1982828782}
   - component: {fileID: 1982828784}
   - component: {fileID: 1982828783}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11114,6 +11095,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 905488570}
     m_Modifications:
+    - target: {fileID: 1766750108, guid: 9155a26ed8a2b04438c46f09e38c706a, type: 3}
+      propertyPath: waterPanel
+      value: 
+      objectReference: {fileID: 2088157244}
     - target: {fileID: 1918357589454920, guid: 9155a26ed8a2b04438c46f09e38c706a, type: 3}
       propertyPath: m_Name
       value: Bottle
@@ -11402,7 +11387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 401.8872, y: 41}
+  m_AnchoredPosition: {x: 401.8872, y: 154}
   m_SizeDelta: {x: 653.7744, y: 271.0898}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2087669984

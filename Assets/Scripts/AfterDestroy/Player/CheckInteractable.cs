@@ -14,12 +14,13 @@ namespace AfterDestroy.Player
         [Header("Inventory settings")] [SerializeField]
         private Inventory.Inventory inventory;
 
-        private bool _isCanCheck;
         private string _interactableTag = "Interactable";
-
-        //Player settings
+        private bool _objectInteract;
+        Transform selection;
         private Ray _ray;
         private bool _isPointImageOn;
+        private IInteractable _inetractableObject;
+        private int _countOfLeftMouseClick;
 
         private void OnValidate()
         {
@@ -32,16 +33,14 @@ namespace AfterDestroy.Player
         private void Update()
         {
             CheckInteract();
+            CheckUserInput();
         }
 
         private void CheckInteract()
         {
-            Transform selection = null;
-            Transform previousParent = null;
-            
-            if (_isCanCheck)
+            if (_objectInteract)
             {
-                CheckUserInput(selection, previousParent);
+                return;
             }
 
             RaycastHit raycastHit;
@@ -51,7 +50,7 @@ namespace AfterDestroy.Player
                 if (selection.CompareTag(_interactableTag))
                 {
                     pointImage.SetOn();
-                    Interact(selection, out previousParent);
+                    Interact(selection);
                 }
                 else
                 {
@@ -60,39 +59,52 @@ namespace AfterDestroy.Player
             }
         }
 
-        private void CheckUserInput(Transform selection, Transform previousParent)
+        private void CheckUserInput()
         {
+            if (_objectInteract == false)
+            {
+                return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
-                // selectionGameObject.gameObject.SetActive(false);
-                // playerController.SetPlayerMove(true);
-                // _isCanCheck = false;
+                _countOfLeftMouseClick++;
+                if (_countOfLeftMouseClick == 3)
+                {
+                    _inetractableObject.Destroy();
+                    playerController.SetPlayerMove(true);
+                    _inetractableObject.DisableCanvas();
+                    _objectInteract = false;
+                    _countOfLeftMouseClick = 0;
+                }
             }
-            else if (Input.GetMouseButtonDown(1))
+
+            if (Input.GetMouseButtonDown(1))
             {
-                // selection.SetParent(previousParent);
+                _inetractableObject.DisableCanvas();
+                _inetractableObject.SetParent(null);
                 playerController.SetPlayerMove(true);
-                _isCanCheck = false;
+                _inetractableObject.ThrowObject();
+                _objectInteract = false;
+                _countOfLeftMouseClick = 0;
             }
         }
 
-        private void Interact(Transform selection, out Transform previousParent)
+        private void Interact(Transform selection)
         {
-            Transform parent = null;
             if (Input.GetMouseButtonDown(0))
             {
                 if (selection.TryGetComponent(out IInteractable interactable))
                 {
+                    _countOfLeftMouseClick++;
+                    _objectInteract = true;
+                    _inetractableObject = interactable;
                     playerController.SetPlayerMove(false);
-                    parent = interactable.GetTransform().parent;
                     interactable.Interact();
                     interactable.SetParent(nearCameraPosition);
                     interactable.SetPosition(nearCameraPosition.transform);
-                    _isCanCheck = true;
                 }
             }
-
-            previousParent = parent;
         }
     }
 }

@@ -1,5 +1,6 @@
-using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AfterDestroy.Interactable
 {
@@ -7,7 +8,13 @@ namespace AfterDestroy.Interactable
     {
         [SerializeField] private GameObject waterPanel;
         private bool _canInteract;
-        
+        private Rigidbody rigidbody;
+
+        private void Start()
+        {
+            rigidbody = GetComponent<Rigidbody>();
+        }
+
         void Update()
         {
             if (_canInteract)
@@ -22,9 +29,10 @@ namespace AfterDestroy.Interactable
             waterPanel.gameObject.SetActive(true);
         }
 
-        public Transform GetTransform()
+        public void Destroy()
         {
-            return gameObject.transform;
+            gameObject.SetActive(false);
+            Destroy(gameObject, Random.Range(0,5f));
         }
 
         public void SetParent(Transform transform)
@@ -35,6 +43,23 @@ namespace AfterDestroy.Interactable
         public void SetPosition(Transform transform)
         {
             gameObject.transform.position = transform.position;
+        }
+
+        public void DisableCanvas()
+        {
+            waterPanel.SetActive(false);
+        }
+
+        public void ThrowObject()
+        {
+            StartCoroutine(ThrowObjectCoroutine());
+        }
+
+        IEnumerator ThrowObjectCoroutine()
+        {
+            rigidbody.isKinematic = false;
+            yield return new WaitForSeconds(2f);
+            rigidbody.isKinematic = true;
         }
     }
 }
