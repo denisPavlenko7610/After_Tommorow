@@ -13,5 +13,7 @@ namespace AfterDestroy.Interactable
         void DisableCanvas();
 
         void ThrowObject();
+
+        string GetObjectName();
     }
 }

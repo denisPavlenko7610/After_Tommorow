@@ -7,12 +7,14 @@ namespace AfterDestroy.Interactable
     public class Water : MonoBehaviour, IInteractable
     {
         [SerializeField] private GameObject waterPanel;
+
         private bool _canInteract;
-        private Rigidbody rigidbody;
+        private Rigidbody _rigidbody;
+        private string objectName = "Вода";
 
         private void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         void Update()
@@ -55,11 +57,16 @@ namespace AfterDestroy.Interactable
             StartCoroutine(ThrowObjectCoroutine());
         }
 
+        public string GetObjectName()
+        {
+            return objectName;
+        }
+
         IEnumerator ThrowObjectCoroutine()
         {
-            rigidbody.isKinematic = false;
+            _rigidbody.isKinematic = false;
             yield return new WaitForSeconds(2f);
-            rigidbody.isKinematic = true;
+            _rigidbody.isKinematic = true;
         }
     }
 }

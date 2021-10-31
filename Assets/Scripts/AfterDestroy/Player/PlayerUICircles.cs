@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,25 +17,34 @@ namespace Assets.Scripts.AfterDestroy.Player
         [SerializeField] Image thirstyImage;
         [SerializeField] Image sleepImage;
 
-        [SerializeField] float timeToCountDown;
+        [SerializeField] float countDownTime;
 
-        void Update()
+        void Start()
         {
-            PlayerStateCountDown(circleHungerImage, timeToCountDown);
-            PlayerStateCountDown(circleThirstyImage, timeToCountDown);
-            PlayerStateCountDown(circleSleepImage, timeToCountDown / 2);
-
-            CheckImageRedStatus();
+            StartCoroutine(UpdateCircles());
         }
 
-        void PlayerStateCountDown(Image image, float time)
+        IEnumerator UpdateCircles()
         {
-            image.fillAmount -= time * Time.deltaTime;
+            while (true)
+            {
+                PlayerStateCountDown(circleHungerImage, countDownTime);
+                PlayerStateCountDown(circleThirstyImage, countDownTime);
+                PlayerStateCountDown(circleSleepImage, countDownTime);
+
+                CheckImageRedStatus();
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        void PlayerStateCountDown(Image image, float time, float slowerParameter = 1)
+        {
+            image.fillAmount -= time * Time.deltaTime * slowerParameter;
 
             if (IsFillAmountNearByZero(image))
             {
                 healthImage.fillAmount -= time * Time.deltaTime;
-            }            
+            }
         }
 
         void CheckImageRedStatus()

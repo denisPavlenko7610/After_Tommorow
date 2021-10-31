@@ -1,5 +1,6 @@
 ﻿using AfterDestroy.Interactable;
 using AfterDestroy.UI;
+using TMPro;
 using UnityEngine;
 
 namespace AfterDestroy.Player
@@ -10,8 +11,10 @@ namespace AfterDestroy.Player
         [SerializeField] private PointImage pointImage;
         [SerializeField] private Transform nearCameraPosition;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private TextMeshProUGUI objectName;
 
-        [Header("Inventory settings")] [SerializeField]
+        [Header("Inventory settings")]
+        [SerializeField]
         private Inventory.Inventory inventory;
 
         private string _interactableTag = "Interactable";
@@ -54,6 +57,7 @@ namespace AfterDestroy.Player
                 }
                 else
                 {
+                    objectName.text = "";
                     pointImage.SetOff();
                 }
             }
@@ -92,9 +96,11 @@ namespace AfterDestroy.Player
 
         private void Interact(Transform selection)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (selection.TryGetComponent(out IInteractable interactable))
             {
-                if (selection.TryGetComponent(out IInteractable interactable))
+                objectName.text = interactable.GetObjectName();
+
+                if (Input.GetMouseButtonDown(0))
                 {
                     _countOfLeftMouseClick++;
                     _objectInteract = true;
