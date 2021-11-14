@@ -4,11 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Asset store/DarkTree FPS/Demo Zone.unity
-    guid: 4fef490da964bf749a96c0b4fbe8c3b9
-  - enabled: 0
-    path: Assets/SceneTransition.unity
-    guid: 3173366a10b6c344298ae389e628321d
-  m_configObjects: {}
+  m_Scenes: []
