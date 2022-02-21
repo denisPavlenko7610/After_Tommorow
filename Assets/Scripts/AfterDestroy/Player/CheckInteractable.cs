@@ -2,6 +2,7 @@
 using AfterDestroy.UI;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace AfterDestroy.Player
 {
@@ -25,12 +26,11 @@ namespace AfterDestroy.Player
         private IInteractable _inetractableObject;
         private int _countOfLeftMouseClick;
 
-        private void OnValidate()
+        [Inject]
+        private void Construct(TextMeshProUGUI objectName, PointImage pointImage)
         {
-            if (pointImage == null)
-            {
-                pointImage = FindObjectOfType<PointImage>();
-            }
+            this.objectName = objectName;
+            this.pointImage = pointImage;
         }
 
         private void Update()

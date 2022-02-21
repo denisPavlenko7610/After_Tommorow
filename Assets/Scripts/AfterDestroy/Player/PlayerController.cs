@@ -1,5 +1,4 @@
 using System.Collections;
-using AfterDestroy.UI;
 using UnityEngine;
 
 namespace AfterDestroy.Player
@@ -31,7 +30,7 @@ namespace AfterDestroy.Player
         private float _currentSpeed;
         private bool _canMove = true;
         
-        public void Init()
+        public void Awake()
         {
             _controller = GetComponent<CharacterController>();
 
