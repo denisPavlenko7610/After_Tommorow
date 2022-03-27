@@ -5,7 +5,7 @@ namespace AfterDestroy.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        [Header("Controll settings")] [SerializeField]
+        [Header("Control settings")] [SerializeField]
         private Camera playerCamera;
 
         [SerializeField] private float mouseSensitivity = 3.5f;
@@ -65,11 +65,9 @@ namespace AfterDestroy.Player
 
         private void UpdateMovement()
         {
-            if (_canMove == false)
-            {
+            if (!_canMove)
                 return;
-            }
-            
+
             Vector2 targetDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             targetDirection.Normalize();
 
@@ -102,13 +100,9 @@ namespace AfterDestroy.Player
         private void ShiftInput()
         {
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-            {
                 _currentSpeed = runSpeed;
-            }
             else
-            {
                 _currentSpeed = walkSpeed;
-            }
         }
 
         private IEnumerator JumpEvent()

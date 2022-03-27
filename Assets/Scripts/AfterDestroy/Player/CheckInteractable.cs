@@ -47,6 +47,9 @@ namespace AfterDestroy.Player
             RaycastHit raycastHit;
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out raycastHit, 100f))
             {
+                if (raycastHit.collider == null)
+                    return;
+                
                 selection = raycastHit.transform;
                 if (selection.CompareTag(_interactableTag))
                 {
@@ -64,9 +67,7 @@ namespace AfterDestroy.Player
         private void CheckUserInput()
         {
             if (_objectInteract == false)
-            {
                 return;
-            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -79,9 +80,7 @@ namespace AfterDestroy.Player
                     _objectInteract = false;
                     _countOfLeftMouseClick = 0;
                 }
-            }
-
-            if (Input.GetMouseButtonDown(1))
+            } else if (Input.GetMouseButtonDown(1))
             {
                 _inetractableObject.DisableCanvas();
                 _inetractableObject.SetParent(null);
