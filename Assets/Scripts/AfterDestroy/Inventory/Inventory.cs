@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,23 +5,33 @@ namespace AfterDestroy.Inventory
 {
     public class Inventory : MonoBehaviour
     {
-        private const int SLOTS = 10;
+        public List<InventoryItem> inventory = new List<InventoryItem>();
+        private Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
 
-        private List<IInventoryItem> items = new List<IInventoryItem>();
-
-        public event EventHandler<InventoryEventArgs> ItemAdded;
-
-        public void AddItem(IInventoryItem item)
+        public void Add(ItemData itemData)
         {
-            if (items.Count < SLOTS)
+            if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
             {
-                items.Add(item);
-                item.OnPickup();
+                item.AddToStack();
             }
-
-            if (ItemAdded != null)
+            else
             {
-                ItemAdded(this, new InventoryEventArgs(item));
+                InventoryItem newItem = new InventoryItem(itemData);
+                inventory.Add(newItem);
+                itemDictionary.Add(itemData, newItem);
+            }
+        }
+
+        public void Remove(ItemData itemData)
+        {
+            if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
+            {
+                item.RemoveFromStack();
+                if (item.stackSize == 0)
+                {
+                    inventory.Remove(item);
+                    itemDictionary.Remove(itemData);
+                }
             }
         }
     }

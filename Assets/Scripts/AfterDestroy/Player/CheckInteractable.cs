@@ -15,8 +15,6 @@ namespace AfterDestroy.Player
         [SerializeField] private TextMeshProUGUI objectName;
 
         [Header("Inventory settings")]
-        [SerializeField]
-        private Inventory.Inventory inventory;
 
         private string _interactableTag = "Interactable";
         private bool _objectInteract;
