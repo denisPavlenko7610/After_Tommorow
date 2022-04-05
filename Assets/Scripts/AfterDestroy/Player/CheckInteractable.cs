@@ -1,4 +1,5 @@
 ﻿using AfterDestroy.Interactable;
+using AfterDestroy.Inventory;
 using AfterDestroy.UI;
 using TMPro;
 using UnityEngine;
@@ -8,27 +9,29 @@ namespace AfterDestroy.Player
 {
     public class CheckInteractable : MonoBehaviour
     {
-        [SerializeField] private Camera playerCamera;
-        [SerializeField] private PointImage pointImage;
-        [SerializeField] private Transform nearCameraPosition;
-        [SerializeField] private PlayerController playerController;
-        [SerializeField] private TextMeshProUGUI objectName;
+        [SerializeField] Camera playerCamera;
+        [SerializeField] PointImage pointImage;
+        [SerializeField] Transform nearCameraPosition;
+        [SerializeField] PlayerController playerController;
+        [SerializeField] TextMeshProUGUI objectName;
 
-        [Header("Inventory settings")]
-
-        private string _interactableTag = "Interactable";
-        private bool _objectInteract;
+        [Header("Inventory settings")] string _interactableTag = "Interactable";
         Transform selection;
-        private Ray _ray;
-        private bool _isPointImageOn;
-        private IInteractable _inetractableObject;
-        private int _countOfLeftMouseClick;
+        Inventory.Inventory inventory;
+        Ray _ray;
+        IInteractable _inetractableObject;
+        private Item currentItem;
+        int _countOfLeftMouseClick;
+        bool _isPointImageOn;
+        bool _objectInteract;
+        int _distanceToInteractObject = 5;
 
         [Inject]
-        private void Construct(TextMeshProUGUI objectName, PointImage pointImage)
+        private void Construct(TextMeshProUGUI objectName, PointImage pointImage, Inventory.Inventory inventory)
         {
             this.objectName = objectName;
             this.pointImage = pointImage;
+            this.inventory = inventory;
         }
 
         private void Update()
@@ -44,16 +47,17 @@ namespace AfterDestroy.Player
                 return;
             }
 
-            RaycastHit raycastHit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out raycastHit, 100f))
+            var ray = playerCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
+            if (Physics.Raycast(ray, out var raycastHit, _distanceToInteractObject))
             {
                 if (raycastHit.collider == null)
                     return;
-                
+
                 selection = raycastHit.transform;
-                if (selection.CompareTag(_interactableTag))
+                if (selection.TryGetComponent(out Item item))
                 {
                     pointImage.SetOn();
+                    currentItem = item;
                     Interact(selection);
                 }
                 else
@@ -74,13 +78,15 @@ namespace AfterDestroy.Player
                 _countOfLeftMouseClick++;
                 if (_countOfLeftMouseClick == 3)
                 {
+                    AddToInventory();
                     _inetractableObject.Destroy();
                     playerController.SetPlayerMove(true);
                     _inetractableObject.DisableCanvas();
                     _objectInteract = false;
                     _countOfLeftMouseClick = 0;
                 }
-            } else if (Input.GetMouseButtonDown(1))
+            }
+            else if (Input.GetMouseButtonDown(1))
             {
                 _inetractableObject.DisableCanvas();
                 _inetractableObject.SetParent(null);
@@ -88,6 +94,17 @@ namespace AfterDestroy.Player
                 _inetractableObject.ThrowObject();
                 _objectInteract = false;
                 _countOfLeftMouseClick = 0;
+            }
+        }
+
+        private void AddToInventory()
+        {
+            for (int i = 0; i < inventory.Items.Count; i++)
+            {
+                if (inventory.Items[i].Id == 0)
+                {
+                    inventory.Items[i] = currentItem;
+                }
             }
         }
 

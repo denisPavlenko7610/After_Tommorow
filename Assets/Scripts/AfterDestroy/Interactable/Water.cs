@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +12,7 @@ namespace AfterDestroy.Interactable
 
         private bool _canInteract;
         private Rigidbody _rigidbody;
-        private string objectName = "Вода";
+        private string objectName = "Р’РѕРґР°";
 
         private void Start()
         {
@@ -47,6 +49,11 @@ namespace AfterDestroy.Interactable
             gameObject.transform.position = transform.position;
         }
 
+        public void AddToInventory()
+        {
+            // Inve
+        }
+
         public void DisableCanvas()
         {
             waterPanel.SetActive(false);
@@ -54,7 +61,7 @@ namespace AfterDestroy.Interactable
 
         public void ThrowObject()
         {
-            StartCoroutine(ThrowObjectCoroutine());
+            ThrowObjectCoroutine();
         }
 
         public string GetObjectName()
@@ -62,10 +69,10 @@ namespace AfterDestroy.Interactable
             return objectName;
         }
 
-        IEnumerator ThrowObjectCoroutine()
+        async void ThrowObjectCoroutine()
         {
             _rigidbody.isKinematic = false;
-            yield return new WaitForSeconds(2f);
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
             _rigidbody.isKinematic = true;
         }
     }

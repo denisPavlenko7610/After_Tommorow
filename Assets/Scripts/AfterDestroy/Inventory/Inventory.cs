@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,34 +6,48 @@ namespace AfterDestroy.Inventory
 {
     public class Inventory : MonoBehaviour
     {
-        public List<InventoryItem> inventory = new List<InventoryItem>();
-        private Dictionary<ItemData, InventoryItem> itemDictionary = new Dictionary<ItemData, InventoryItem>();
+        [SerializeField] GameObject cellContainer;
+        [SerializeField] private KeyCode showInventory = KeyCode.Tab;
+        public List<Item> Items { get; set; } = new List<Item>();
 
-        public void Add(ItemData itemData)
+        private void Start()
         {
-            if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
+            for (int i = 0; i < cellContainer.transform.childCount; i++)
             {
-                item.AddToStack();
+                Items.Add(new Item());
             }
-            else
+
+            HideInventory();
+        }
+
+        private void Update()
+        {
+            SwitchInventoryStatus();
+        }
+
+        private void SwitchInventoryStatus()
+        {
+            if (Input.GetKeyDown(showInventory))
             {
-                InventoryItem newItem = new InventoryItem(itemData);
-                inventory.Add(newItem);
-                itemDictionary.Add(itemData, newItem);
+                if (cellContainer.activeSelf)
+                {
+                    HideInventory();
+                }
+                else
+                {
+                    ShowInventory();
+                }
             }
         }
 
-        public void Remove(ItemData itemData)
+        private void ShowInventory()
         {
-            if (itemDictionary.TryGetValue(itemData, out InventoryItem item))
-            {
-                item.RemoveFromStack();
-                if (item.stackSize == 0)
-                {
-                    inventory.Remove(item);
-                    itemDictionary.Remove(itemData);
-                }
-            }
+            cellContainer.gameObject.SetActive(true);
+        }
+
+        private void HideInventory()
+        {
+            cellContainer.gameObject.SetActive(false);
         }
     }
 }
