@@ -10192,6 +10192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell
       objectReference: {fileID: 0}
+    - target: {fileID: 745401295402610108, guid: 4535721dda743304b8d84016ca10023e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 745401295402610109, guid: 4535721dda743304b8d84016ca10023e,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -10221,6 +10226,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 745401295459023430, guid: 4535721dda743304b8d84016ca10023e,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 745401295459023430, guid: 4535721dda743304b8d84016ca10023e,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 44.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4535721dda743304b8d84016ca10023e, type: 3}
