@@ -18,7 +18,6 @@ namespace AfterDestroy.Player
         [SerializeField] private float jumpMultiplier;
         [SerializeField] private float runSpeed;
         
-        //Control settings
         private float _cameraPitch;
         private CharacterController _controller;
         private Vector2 _currentDir = Vector2.zero;

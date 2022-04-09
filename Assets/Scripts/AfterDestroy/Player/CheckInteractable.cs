@@ -78,7 +78,7 @@ namespace AfterDestroy.Player
                 _countOfLeftMouseClick++;
                 if (_countOfLeftMouseClick == 3)
                 {
-                    AddToInventory();
+                    inventory.DisplayItem(currentItem);
                     _inetractableObject.Destroy();
                     playerController.SetPlayerMove(true);
                     _inetractableObject.DisableCanvas();
@@ -94,17 +94,6 @@ namespace AfterDestroy.Player
                 _inetractableObject.ThrowObject();
                 _objectInteract = false;
                 _countOfLeftMouseClick = 0;
-            }
-        }
-
-        private void AddToInventory()
-        {
-            for (int i = 0; i < inventory.Items.Count; i++)
-            {
-                if (inventory.Items[i].Id == 0)
-                {
-                    inventory.Items[i] = currentItem;
-                }
             }
         }
 

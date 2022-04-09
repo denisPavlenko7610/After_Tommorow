@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace AfterDestroy.Inventory
 {
@@ -6,10 +7,10 @@ namespace AfterDestroy.Inventory
     {
         [SerializeField] string itemName;
         public int Id { get; set; }
+        public AssetReferenceSprite icon;
         [SerializeField] int countItem;
         [SerializeField] bool isStackable;
         [SerializeField] string descriptionItem;
-        [SerializeField] string iconPath;
-        [SerializeField] string prefabPath;
+        [SerializeField] AssetReference prefab;
     }
 }
