@@ -28,11 +28,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Sprite
   - m_GUID: 0464d2c3cbb7a4d44aa6e6a4f4b66a4c
-    m_Address: Assets/Prefabs/Environment/PickupItem/Apple.prefab
+    m_Address: Apple
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Item
   - m_GUID: 47b4945a8f5d3694a9d7c095bb246d76
-    m_Address: Assets/Sprites/UI/Inventory/Icon/apple.png
+    m_Address: apple
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sprite

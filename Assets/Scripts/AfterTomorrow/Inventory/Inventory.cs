@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,9 @@ namespace AfterDestroy.Inventory
         {
             for (int i = 0; i < cellContainer.transform.childCount; i++)
             {
-                Items.Add(new Item());
+                var newItem = gameObject.AddComponent<Item>();
+                newItem.Id = i;
+                Items.Add(newItem);
             }
         }
 
@@ -36,12 +39,14 @@ namespace AfterDestroy.Inventory
             {
                 if (Items[i].Id == 0)
                 {
-                    Items[i] = item;
+                    Items[i].item = item.item;
                     var cell = cellContainer.transform.GetChild(i);
                     var icon = cell.GetChild(0);
+                    var count = icon.GetChild(0).GetComponent<TextMeshProUGUI>();
+                    count.text = item.item.Count.ToString();
                     var image = icon.GetComponent<Image>();
                     image.enabled = true;
-                    var sprite = await Items[i].icon.LoadAssetAsync<Sprite>();
+                    var sprite = await Items[i].item.icon.LoadAssetAsync<Sprite>();
                     if (sprite == null)
                         continue;
                     
@@ -66,14 +71,8 @@ namespace AfterDestroy.Inventory
             }
         }
 
-        void ShowInventory()
-        {
-            cellContainer.gameObject.SetActive(true);
-        }
+        void ShowInventory() => cellContainer.gameObject.SetActive(true);
 
-        void HideInventory()
-        {
-            cellContainer.gameObject.SetActive(false);
-        }
+        void HideInventory() => cellContainer.gameObject.SetActive(false);
     }
 }

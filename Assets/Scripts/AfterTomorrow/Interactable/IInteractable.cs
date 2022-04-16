@@ -10,8 +10,6 @@ namespace AfterDestroy.Interactable
         void SetParent(Transform transform);
         void SetPosition(Transform transform);
 
-        void AddToInventory();
-
         void DisableCanvas();
 
         void ThrowObject();

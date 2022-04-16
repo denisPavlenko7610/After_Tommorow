@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5426297067518944249}
   - component: {fileID: 1274748892182479593}
   - component: {fileID: 1274748892182479592}
-  m_Layer: 21
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -122,12 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f57794703d5415bbe9f73f8254bd55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1274748893526079217}
-  pointImage: {fileID: 0}
-  nearCameraPosition: {fileID: 1274748892412050977}
-  playerController: {fileID: 1274748892182479593}
-  objectName: {fileID: 0}
-  inventory: {fileID: 0}
+  _playerCamera: {fileID: 1274748893526079217}
+  _pointImage: {fileID: 0}
+  _nearCameraPosition: {fileID: 1274748892412050977}
+  _playerController: {fileID: 1274748892182479593}
+  _objectName: {fileID: 0}
 --- !u!1 &1274748892412050974
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1274748892412050977}
-  m_Layer: 21
+  m_Layer: 11
   m_Name: Object near camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +168,7 @@ GameObject:
   - component: {fileID: 1274748893526079215}
   - component: {fileID: 1274748893526079217}
   - component: {fileID: 1274748893526079214}
-  m_Layer: 21
+  m_Layer: 11
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}

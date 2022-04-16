@@ -9,18 +9,18 @@ namespace AfterDestroy.Player
 {
     public class CheckInteractable : MonoBehaviour
     {
-        [SerializeField] Camera playerCamera;
-        [SerializeField] PointImage pointImage;
-        [SerializeField] Transform nearCameraPosition;
-        [SerializeField] PlayerController playerController;
-        [SerializeField] TextMeshProUGUI objectName;
+        [SerializeField] Camera _playerCamera;
+        [SerializeField] PointImage _pointImage;
+        [SerializeField] Transform _nearCameraPosition;
+        [SerializeField] PlayerController _playerController;
+        [SerializeField] TextMeshProUGUI _objectName;
 
         [Header("Inventory settings")] string _interactableTag = "Interactable";
-        Transform selection;
-        Inventory.Inventory inventory;
+        Transform _selection;
+        Inventory.Inventory _inventory;
         Ray _ray;
         IInteractable _inetractableObject;
-        private Item currentItem;
+        Item _currentItem;
         int _countOfLeftMouseClick;
         bool _isPointImageOn;
         bool _objectInteract;
@@ -29,9 +29,9 @@ namespace AfterDestroy.Player
         [Inject]
         private void Construct(TextMeshProUGUI objectName, PointImage pointImage, Inventory.Inventory inventory)
         {
-            this.objectName = objectName;
-            this.pointImage = pointImage;
-            this.inventory = inventory;
+            _objectName = objectName;
+            _pointImage = pointImage;
+            _inventory = inventory;
         }
 
         private void Update()
@@ -47,23 +47,23 @@ namespace AfterDestroy.Player
                 return;
             }
 
-            var ray = playerCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
+            var ray = _playerCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
             if (Physics.Raycast(ray, out var raycastHit, _distanceToInteractObject))
             {
                 if (raycastHit.collider == null)
                     return;
 
-                selection = raycastHit.transform;
-                if (selection.TryGetComponent(out Item item))
+                _selection = raycastHit.transform;
+                if (_selection.TryGetComponent(out Item item))
                 {
-                    pointImage.SetOn();
-                    currentItem = item;
-                    Interact(selection);
+                    _pointImage.SetOn();
+                    _currentItem = item;
+                    Interact(_selection);
                 }
                 else
                 {
-                    objectName.text = "";
-                    pointImage.SetOff();
+                    _objectName.text = "";
+                    _pointImage.SetOff();
                 }
             }
         }
@@ -75,22 +75,25 @@ namespace AfterDestroy.Player
 
             if (Input.GetMouseButtonDown(0))
             {
+                _objectName.text = "";
                 _countOfLeftMouseClick++;
+                
                 if (_countOfLeftMouseClick == 3)
                 {
-                    inventory.DisplayItem(currentItem);
+                    _objectName.text = "";
                     _inetractableObject.Destroy();
-                    playerController.SetPlayerMove(true);
+                    _playerController.SetPlayerMove(true);
                     _inetractableObject.DisableCanvas();
                     _objectInteract = false;
                     _countOfLeftMouseClick = 0;
+                    _inventory.DisplayItem(_currentItem);
                 }
             }
             else if (Input.GetMouseButtonDown(1))
             {
                 _inetractableObject.DisableCanvas();
                 _inetractableObject.SetParent(null);
-                playerController.SetPlayerMove(true);
+                _playerController.SetPlayerMove(true);
                 _inetractableObject.ThrowObject();
                 _objectInteract = false;
                 _countOfLeftMouseClick = 0;
@@ -101,17 +104,17 @@ namespace AfterDestroy.Player
         {
             if (selection.TryGetComponent(out IInteractable interactable))
             {
-                objectName.text = interactable.GetObjectName();
+                _objectName.text = interactable.GetObjectName();
 
                 if (Input.GetMouseButtonDown(0))
                 {
                     _countOfLeftMouseClick++;
                     _objectInteract = true;
                     _inetractableObject = interactable;
-                    playerController.SetPlayerMove(false);
+                    _playerController.SetPlayerMove(false);
                     interactable.Interact();
-                    interactable.SetParent(nearCameraPosition);
-                    interactable.SetPosition(nearCameraPosition.transform);
+                    interactable.SetParent(_nearCameraPosition);
+                    interactable.SetPosition(_nearCameraPosition.transform);
                 }
             }
         }
