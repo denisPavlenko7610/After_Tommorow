@@ -17,9 +17,9 @@ namespace AfterDestroy.Player
         [SerializeField] private AnimationCurve jumpFallOff;
         [SerializeField] private float jumpMultiplier;
         [SerializeField] private float runSpeed;
-        
+        [SerializeField] CharacterController _controller;
+
         private float _cameraPitch;
-        private CharacterController _controller;
         private Vector2 _currentDir = Vector2.zero;
         private Vector2 _currentDirVelocity = Vector2.zero;
         private Vector2 _currentMouseDelta = Vector2.zero;
@@ -29,15 +29,13 @@ namespace AfterDestroy.Player
         private float _currentSpeed;
         private bool _canMove = true;
         
-        public void Awake()
+        public void Start()
         {
-            _controller = GetComponent<CharacterController>();
-
-            if (lookCursor)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            // if (lookCursor)
+            // {
+            //     Cursor.lockState = CursorLockMode.Locked;
+            //     Cursor.visible = false;
+            // }
         }
 
         private void Update()

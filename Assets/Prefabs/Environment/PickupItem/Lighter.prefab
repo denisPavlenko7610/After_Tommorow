@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6019220474517198551}
   - component: {fileID: 5779796581188520444}
   - component: {fileID: 6042417338429752595}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Lighter
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

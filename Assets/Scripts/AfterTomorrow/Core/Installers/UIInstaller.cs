@@ -7,13 +7,15 @@ namespace AfterDestroy.Core.Installers
 {
     public class UIInstaller : MonoInstaller
     {
-        [SerializeField] private TextMeshProUGUI objectName;  
-        [SerializeField] private PointImage pointImage;  
+        [SerializeField] TextMeshProUGUI objectName;  
+        [SerializeField] PointImage pointImage;
+        [SerializeField] Inventory.Inventory inventory;
 
         public override void InstallBindings()
         {
             Container.Bind<TextMeshProUGUI>().FromInstance(objectName).AsSingle().NonLazy();
             Container.Bind<PointImage>().FromInstance(pointImage).AsSingle().NonLazy();
+            Container.Bind<Inventory.Inventory>().FromInstance(inventory).AsSingle().NonLazy();
         }
     }
 }

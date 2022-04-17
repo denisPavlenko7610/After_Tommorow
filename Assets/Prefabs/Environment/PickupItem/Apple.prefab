@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 471429259991350000}
   - component: {fileID: 1470174633865157749}
   - component: {fileID: 7261296751268686829}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Apple
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,9 +27,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494292161529407766}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.609314, y: -0.30882263, z: -0.5470581}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -108,20 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cda0c130ba4a88952eb15d93f8bd93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: "\u041A\u0440\u0430\u0441\u043D\u043E\u0435 \u044F\u0431\u043B\u043E\u043A\u043E"
-  icon:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  countItem: 1
-  isStackable: 1
-  descriptionItem: "\u0412\u043A\u0443\u0441\u043D\u043E\u0435 \u044F\u0431\u043B\u043E\u043A\u043E
-    \u0431\u044B\u0432\u0430\u0435\u0442 \u043E\u0447\u0435\u043D\u044C \u043F\u043E\u043B\u0435\u0437\u043D\u044B\u043C,
-    \u043E\u0441\u043E\u0431\u0435\u043D\u043D\u043E \u043A\u043E\u0433\u0434\u0430
-    \u0442\u044B \u0433\u043E\u043B\u043E\u0434\u0435\u043D."
-  prefab:
-    m_AssetGUID: 0464d2c3cbb7a4d44aa6e6a4f4b66a4c
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  item: {fileID: 0}
+  Id: 0

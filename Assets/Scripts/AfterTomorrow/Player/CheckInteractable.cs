@@ -1,5 +1,4 @@
 ﻿using AfterDestroy.Interactable;
-using AfterDestroy.Inventory;
 using AfterDestroy.UI;
 using TMPro;
 using UnityEngine;
@@ -15,8 +14,8 @@ namespace AfterDestroy.Player
         [SerializeField] PlayerController _playerController;
         [SerializeField] TextMeshProUGUI _objectName;
 
-        [Header("Inventory settings")] string _interactableTag = "Interactable";
-        Transform _selection;
+        [Header("Inventory settings")]
+        Transform _selectionObject;
         Inventory.Inventory _inventory;
         Ray _ray;
         IInteractable _inetractableObject;
@@ -43,9 +42,7 @@ namespace AfterDestroy.Player
         private void CheckInteract()
         {
             if (_objectInteract)
-            {
                 return;
-            }
 
             var ray = _playerCamera.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
             if (Physics.Raycast(ray, out var raycastHit, _distanceToInteractObject))
@@ -53,12 +50,12 @@ namespace AfterDestroy.Player
                 if (raycastHit.collider == null)
                     return;
 
-                _selection = raycastHit.transform;
-                if (_selection.TryGetComponent(out Item item))
+                _selectionObject = raycastHit.transform;
+                if (_selectionObject.TryGetComponent(out Item item))
                 {
                     _pointImage.SetOn();
                     _currentItem = item;
-                    Interact(_selection);
+                    Interact(_selectionObject);
                 }
                 else
                 {
@@ -75,18 +72,20 @@ namespace AfterDestroy.Player
 
             if (Input.GetMouseButtonDown(0))
             {
+                _pointImage.SetOff();
                 _objectName.text = "";
                 _countOfLeftMouseClick++;
                 
                 if (_countOfLeftMouseClick == 3)
                 {
+                    _pointImage.SetOff();
                     _objectName.text = "";
                     _inetractableObject.Destroy();
                     _playerController.SetPlayerMove(true);
                     _inetractableObject.DisableCanvas();
                     _objectInteract = false;
                     _countOfLeftMouseClick = 0;
-                    _inventory.DisplayItem(_currentItem);
+                    _inventory.DisplayItem(_currentItem).Forget();
                 }
             }
             else if (Input.GetMouseButtonDown(1))

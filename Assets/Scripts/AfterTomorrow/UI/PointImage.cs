@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,22 +6,9 @@ namespace AfterDestroy.UI
 {
     public class PointImage : MonoBehaviour
     {
-        private Image _point;
-        private Animator _animator;
+        [SerializeField] Image _point;
+        [SerializeField] Animator _animator;
         private static readonly int IsVisible = Animator.StringToHash("isVisible");
-
-        private void OnValidate()
-        {
-            if (_point == null)
-            {
-                _point = GetComponent<Image>();
-            }
-
-            if (_animator == null)
-            {
-                _animator = GetComponent<Animator>();
-            }
-        }
 
         public void SetOn()
         {
