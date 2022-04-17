@@ -31,11 +31,11 @@ namespace AfterDestroy.Player
         
         public void Start()
         {
-            // if (lookCursor)
-            // {
-            //     Cursor.lockState = CursorLockMode.Locked;
-            //     Cursor.visible = false;
-            // }
+            if (lookCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         private void Update()
