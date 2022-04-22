@@ -28,11 +28,6 @@ namespace AfterDestroy.Inventory
                 Items.Add(newItem);
             }
         }
-
-        void Update()
-        {
-            SwitchInventoryStatus();
-        }
         
         public async UniTaskVoid DisplayItem(Item item)
         {
@@ -57,7 +52,7 @@ namespace AfterDestroy.Inventory
             }
         }
 
-        void SwitchInventoryStatus()
+        public void SwitchInventoryStatus()
         {
             if (Input.GetKeyDown(showInventory))
             {

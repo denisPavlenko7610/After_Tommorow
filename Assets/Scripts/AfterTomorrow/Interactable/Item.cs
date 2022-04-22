@@ -28,17 +28,13 @@ namespace AfterDestroy.Interactable
         void Update()
         {
             if (_canInteract)
-            {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
         }
 
         private void OnCollisionEnter(Collision other)
         {
             if (other.collider.CompareTag(GroundTag))
-            {
                 _rigidbody.isKinematic = true;
-            }
         }
 
         public void Interact()

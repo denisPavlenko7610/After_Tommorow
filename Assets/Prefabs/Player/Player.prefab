@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 1274748892182479591}
   - component: {fileID: 5426297067518944249}
   - component: {fileID: 1274748892182479593}
+  - component: {fileID: 5782441098634363161}
+  - component: {fileID: 8941563506985158893}
+  - component: {fileID: 4093711940982412914}
   - component: {fileID: 1274748892182479592}
   m_Layer: 11
   m_Name: Player
@@ -78,40 +81,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12fcfcdd2680d5468a376c6dd3ed7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lookCursor: 1
+  _playerMove: {fileID: 4093711940982412914}
+  _playerLook: {fileID: 5782441098634363161}
+  _playerJump: {fileID: 8941563506985158893}
+  _checkInteractable: {fileID: 1274748892182479592}
+--- !u!114 &5782441098634363161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274748892182479588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5311541f58aafe408ccedbe4c6ba8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerCamera: {fileID: 1274748893526079217}
-  mouseSensitivity: 3.5
-  lookCursor: 1
-  walkSpeed: 6
-  moveSmoothTime: 0.3
-  mouseSmoothTime: 0.03
-  gravity: -13
-  jumpFallOff:
+  xRotation: 0
+  xSensitivity: 30
+  ySensitivity: 30
+  clampXRotation: 80
+--- !u!114 &8941563506985158893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274748892182479588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047dd7fc735447f47a6d12da37352455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpFallOff:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.0625
-      value: 0.9967041
+      time: 0
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.9708252
-      value: 0.0032997131
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpMultiplier: 9
-  runSpeed: 10
+  _jumpMultiplier: 5
   _controller: {fileID: 1274748892182479591}
+--- !u!114 &4093711940982412914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274748892182479588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1be970a9ce77a48b71392df382dc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSmoothTime: 0.3
+  _gravity: -13
+  _controller: {fileID: 1274748892182479591}
+  _walkSpeed: 6
+  _runSpeed: 12
 --- !u!114 &1274748892182479592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +175,9 @@ MonoBehaviour:
   _nearCameraPosition: {fileID: 1274748892412050977}
   _playerController: {fileID: 1274748892182479593}
   _objectName: {fileID: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1274748892412050974
 GameObject:
   m_ObjectHideFlags: 0

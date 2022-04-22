@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 4923210693371026927}
   - component: {fileID: 5220606174050927335}
   - component: {fileID: 4900334804180467612}
-  - component: {fileID: -6790000510101943922}
   - component: {fileID: 1366516933}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: BottleOfWater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,20 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-6790000510101943922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4902076069832390729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66cda0c130ba4a88952eb15d93f8bd93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 9ec4b621aa84c5842adf7cd52150bec2, type: 2}
-  Id: 1
 --- !u!114 &1366516933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,5 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb49973d6330b546bfe95be423ebedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 9ec4b621aa84c5842adf7cd52150bec2, type: 2}
+  Id: 0
   itemInfoPanel: {fileID: 0}
-  item: {fileID: -6790000510101943922}
