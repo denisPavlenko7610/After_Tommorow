@@ -28,7 +28,7 @@ namespace AfterDestroy.Inventory
                 Items.Add(newItem);
             }
         }
-        
+
         public async UniTaskVoid DisplayItem(Item item)
         {
             for (int i = 0; i < Items.Count; i++)
@@ -45,7 +45,7 @@ namespace AfterDestroy.Inventory
                     var sprite = await Items[i].item.icon.LoadAssetAsync<Sprite>();
                     if (sprite == null)
                         continue;
-                    
+
                     image.sprite = sprite;
                     break;
                 }
@@ -54,16 +54,13 @@ namespace AfterDestroy.Inventory
 
         public void SwitchInventoryStatus()
         {
-            if (Input.GetKeyDown(showInventory))
+            if (cellContainer.activeSelf)
             {
-                if (cellContainer.activeSelf)
-                {
-                    HideInventory();
-                }
-                else
-                {
-                    ShowInventory();
-                }
+                HideInventory();
+            }
+            else
+            {
+                ShowInventory();
             }
         }
 

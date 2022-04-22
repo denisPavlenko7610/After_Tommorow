@@ -5,8 +5,8 @@ namespace AfterDestroy.Core.Installers
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Player.Player player;
-        [SerializeField] private Transform playerTransformPosition;
+        [SerializeField] Player.Player player;
+        [SerializeField] Transform playerTransformPosition;
 
         public override void InstallBindings()
         {

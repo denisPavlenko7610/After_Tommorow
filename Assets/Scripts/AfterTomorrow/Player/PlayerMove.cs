@@ -13,6 +13,11 @@ public class PlayerMove : MonoBehaviour
     float _currentSpeed;
     float _velocityY;
 
+    private void Start()
+    {
+        _currentSpeed = _walkSpeed;
+    }
+
     public void UpdateMovement(Vector2 input)
     {
         var targetDirection = new Vector2(input.x, input.y);
@@ -28,13 +33,7 @@ public class PlayerMove : MonoBehaviour
         _controller.Move(velocity * Time.deltaTime);
     }
 
-    public void Shift()
-    {
-        _currentSpeed = _runSpeed;
-    }
+    public void Shift() => _currentSpeed = _runSpeed;
 
-    public void UnShift()
-    {
-        _currentSpeed = _walkSpeed;
-    }
+    public void UnShift() => _currentSpeed = _walkSpeed;
 }

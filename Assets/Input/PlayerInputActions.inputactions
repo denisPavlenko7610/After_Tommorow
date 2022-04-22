@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire",
+                    "name": "LeftClick",
                     "type": "Button",
                     "id": "1e8d0c2f-7d8f-4ac5-8b1a-c6a28d78628a",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
+                    "name": "RightClick",
                     "type": "Button",
                     "id": "9ab3c196-6efa-4365-995f-87b5181ec2ff",
                     "expectedControlType": "Button",
@@ -231,7 +231,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -242,7 +242,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "RightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
