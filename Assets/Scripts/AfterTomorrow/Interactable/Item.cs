@@ -40,7 +40,7 @@ namespace AfterDestroy.Interactable
         public void Interact()
         {
             _canInteract = true;
-            itemInfoPanel.ShowPanel(item.ItemName, item.descriptionItem, item.Weight);
+            itemInfoPanel.ShowPanel(item.ItemName, item.DescriptionItem, item.Weight);
         }
 
         public void Destroy()

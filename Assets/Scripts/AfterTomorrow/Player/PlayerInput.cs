@@ -14,7 +14,7 @@ namespace AfterTomorrow.Player
         [SerializeField] private CheckInteractable _checkInteractable;
         
         bool _canMove = true;
-        PlayerInputActions playerInputActions;
+        PlayerInputActions _playerInputActions;
         AfterDestroy.Inventory.Inventory _inventory;
 
         [Inject]
@@ -25,26 +25,26 @@ namespace AfterTomorrow.Player
 
         private void OnEnable()
         {
-            playerInputActions?.Enable();
-            playerInputActions.Player.Jump.started += Jump;
-            playerInputActions.Player.Shift.performed += Shift;
-            playerInputActions.Player.Shift.canceled += ShiftUp;
-            playerInputActions.Player.LeftClick.started += LeftClickDown;
-            playerInputActions.Player.LeftClick.canceled += LeftClickUp;
-            playerInputActions.Player.RightClick.started += RightClickDown;
-            playerInputActions.Player.Inventory.started += DisplayInventory;
+            _playerInputActions?.Enable();
+            _playerInputActions.Player.Jump.started += Jump; 
+            _playerInputActions.Player.Shift.performed += Shift; 
+            _playerInputActions.Player.Shift.canceled += ShiftUp;
+            _playerInputActions.Player.LeftClick.started += LeftClickDown;
+            _playerInputActions.Player.LeftClick.canceled += LeftClickUp;
+            _playerInputActions.Player.RightClick.started += RightClickDown;
+            _playerInputActions.Player.Inventory.started += DisplayInventory;
         }
 
         private void OnDisable()
         {
-            playerInputActions?.Disable();
-            playerInputActions.Player.Jump.started -= Jump;
-            playerInputActions.Player.Shift.performed -= Shift;
-            playerInputActions.Player.Shift.canceled -= ShiftUp;
-            playerInputActions.Player.LeftClick.started -= LeftClickDown;
-            playerInputActions.Player.LeftClick.canceled -= LeftClickUp;
-            playerInputActions.Player.RightClick.started -= RightClickDown;
-            playerInputActions.Player.Inventory.started -= DisplayInventory;
+            _playerInputActions?.Disable();
+            _playerInputActions.Player.Jump.started -= Jump;
+            _playerInputActions.Player.Shift.performed -= Shift;
+            _playerInputActions.Player.Shift.canceled -= ShiftUp;
+            _playerInputActions.Player.LeftClick.started -= LeftClickDown;
+            _playerInputActions.Player.LeftClick.canceled -= LeftClickUp;
+            _playerInputActions.Player.RightClick.started -= RightClickDown;
+            _playerInputActions.Player.Inventory.started -= DisplayInventory;
         }
 
         public void Awake()
@@ -55,17 +55,17 @@ namespace AfterTomorrow.Player
                 Cursor.visible = false;
             }
 
-            playerInputActions = new PlayerInputActions();
+            _playerInputActions = new PlayerInputActions();
         }
 
         private void Update()
         {
-            _playerLook.MouseLook(playerInputActions.Player.Look.ReadValue<Vector2>());
+            _playerLook.MouseLook(_playerInputActions.Player.Look.ReadValue<Vector2>());
 
             if (!_canMove)
                 return;
 
-            _playerMove.UpdateMovement(playerInputActions.Player.Move.ReadValue<Vector2>());
+            _playerMove.UpdateMovement(_playerInputActions.Player.Move.ReadValue<Vector2>());
         }
 
         public void SetPlayerMove(bool isCanMove)

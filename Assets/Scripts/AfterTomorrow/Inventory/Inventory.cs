@@ -42,7 +42,7 @@ namespace AfterDestroy.Inventory
                     count.text = item.item.Count.ToString();
                     var image = icon.GetComponent<Image>();
                     image.enabled = true;
-                    var sprite = await Items[i].item.icon.LoadAssetAsync<Sprite>();
+                    var sprite = await Items[i].item.Icon.LoadAssetAsync<Sprite>();
                     if (sprite == null)
                         continue;
 
