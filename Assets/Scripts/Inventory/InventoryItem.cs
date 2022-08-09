@@ -7,20 +7,23 @@ namespace Inventory
     {
         public InventoryItemData Data { get; private set; }
         public int StackSize { get; private set; }
+        public float Weight { get; private set; }
 
         public InventoryItem(InventoryItemData data)
         {
             Data = data;
-            AddToStack();
+            AddToStack(data);
         }
 
-        public void AddToStack()
+        public void AddToStack(InventoryItemData data)
         {
+            Weight += data.Weight;
             StackSize++;
         }
 
-        public void RemoveFromStack()
+        public void RemoveFromStack(InventoryItemData data)
         {
+            Weight -= data.Weight;
             StackSize--;
         }
     }

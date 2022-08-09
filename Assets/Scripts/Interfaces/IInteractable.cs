@@ -2,7 +2,7 @@
 
 namespace AfterDestroy.Interactable
 {
-    public interface IInteractable
+    public interface IInteractable : IDestroy
     {
         void Interact();
         

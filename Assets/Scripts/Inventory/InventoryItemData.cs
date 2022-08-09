@@ -12,7 +12,7 @@ namespace Inventory
         public string DescriptionItem { get; private set; }
 
         [field: SerializeField] public float Weight { get; private set; }
-        [field: SerializeField] public int Count { get; private set; }
+        [field: SerializeField] public int Count { get; private set; } = 1;
         [field: SerializeField] public bool IsStackable { get; private set; } = true;
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }

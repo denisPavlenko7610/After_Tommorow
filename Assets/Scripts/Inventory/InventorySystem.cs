@@ -7,20 +7,20 @@ namespace AfterDestroy.Inventory
     public class InventorySystem : MonoBehaviour
     {
 
-        public List<InventoryItem> Inventory { get; private set; } = new();
-        private Dictionary<InventoryItemData, InventoryItem> inventoryDictionary = new();
+        public List<InventoryItem> Inventory { get; } = new();
+        Dictionary<InventoryItemData, InventoryItem> inventoryDictionary = new();
 
         public void Add(InventoryItemData referenceData)
         {
             if (inventoryDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
-                value.AddToStack();
+                value.AddToStack(referenceData);
             }
             else
             {
-                InventoryItem newHelper = new InventoryItem(referenceData);
-                Inventory.Add(newHelper);
-                inventoryDictionary.Add(referenceData, newHelper);
+                InventoryItem newItem = new InventoryItem(referenceData);
+                Inventory.Add(newItem);
+                inventoryDictionary.Add(referenceData, newItem);
             }
         }
 
@@ -28,7 +28,7 @@ namespace AfterDestroy.Inventory
         {
             if (inventoryDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
-                value.RemoveFromStack();
+                value.RemoveFromStack(referenceData);
 
                 if (value.StackSize == 0)
                 {

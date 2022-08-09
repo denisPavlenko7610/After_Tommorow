@@ -6,7 +6,7 @@ using Zenject;
 
 namespace AfterDestroy.Interactable
 {
-    public class InventoryObject : MonoBehaviour, IInteractable, IDestroy
+    public class InventoryObject : MonoBehaviour, IInteractable
     {
         [SerializeField] private InventoryItemData _itemData;
         [SerializeField, Attach] private Rigidbody _rigidbody;
@@ -34,7 +34,7 @@ namespace AfterDestroy.Interactable
             _inventorySystem.Add(_itemData);
         }
 
-        private void OnCollisionEnter(Collision other)
+        void OnCollisionEnter(Collision other)
         {
             if (other.collider.CompareTag(GroundTag))
                 _rigidbody.isKinematic = true;
@@ -56,9 +56,6 @@ namespace AfterDestroy.Interactable
 
         public string GetObjectName() => _itemData.ItemName;
 
-        public void Destroy()
-        {
-            Destroy(gameObject);
-        }
+        public void Destroy() => Destroy(gameObject);
     }
 }

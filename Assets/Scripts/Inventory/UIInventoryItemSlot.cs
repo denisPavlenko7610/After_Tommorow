@@ -7,17 +7,20 @@ namespace Inventory
 {
     public class UIInventoryItemSlot : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _slotName;
-        [SerializeField] private TextMeshProUGUI _stackSize;
-        [SerializeField] private Image _icon;
-        [SerializeField, Attach] private Transform _stackObject;
+        [SerializeField] TextMeshProUGUI _slotName;
+        [SerializeField] TextMeshProUGUI _stackSize;
+        [SerializeField] TextMeshProUGUI _weight;
+        [SerializeField] Image _icon;
+        [SerializeField, Attach] Transform _stackObject;
 
         public void Set(InventoryItem item)
         {
             _slotName.text = item.Data.name;
+            _icon.enabled = true;
             _icon.sprite = item.Data.Icon;
+            _weight.text = $"{item.Weight:f2}kg";
 
-            if (item.StackSize <=1)
+            if (item.StackSize < 1)
             {
                 _stackObject.gameObject.SetActive(false);
                 return;

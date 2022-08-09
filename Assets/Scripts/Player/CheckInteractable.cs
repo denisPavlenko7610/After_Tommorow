@@ -25,19 +25,19 @@ namespace AfterDestroy.Player
         int _countOfLeftMouseClick;
         bool _isPointImageOn;
         bool _objectInteract;
-        int _distanceToInteractObject = 5;
-        private bool _isClicked;
-        private int _clicksCountToGetObject = 2;
-        private InventoryObject currentItemObject;
+        int _distanceToInteractObject = 7;
+        bool _isClicked;
+        int _clicksCountToGetObject = 2;
+        InventoryObject currentItemObject;
 
         [Inject]
-        private void Construct(TextMeshProUGUI objectName, PointImage pointImage)
+        void Construct(TextMeshProUGUI objectName, PointImage pointImage)
         {
             _objectName = objectName;
             _pointImage = pointImage;
         }
 
-        private void Update()
+        void Update()
         {
             CheckInteract();
         }
@@ -55,14 +55,13 @@ namespace AfterDestroy.Player
                 return;
 
             if (currentItemObject)
-            {
                 currentItemObject.OnPickupItem();
-            }
-            
+
             _pointImage.SetOff();
             _objectName.DOFade(0, _transitionTimeInSec);
             _playerInput.SetPlayerMove(true);
             _inetractableObject.DisableCanvas();
+            _inetractableObject.Destroy();
             _objectInteract = false;
             _countOfLeftMouseClick = 0;
         }
@@ -80,7 +79,7 @@ namespace AfterDestroy.Player
             _countOfLeftMouseClick = 0;
         }
 
-        private void CheckInteract()
+        void CheckInteract()
         {
             if (_objectInteract)
                 return;
@@ -109,7 +108,7 @@ namespace AfterDestroy.Player
             }
         }
 
-        private void Interact(Transform selection)
+        void Interact(Transform selection)
         {
             if (!selection.TryGetComponent(out IInteractable interactable))
                 return;
