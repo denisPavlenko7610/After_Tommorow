@@ -16,9 +16,9 @@ public class IconGenerator : MonoBehaviour
     [Button("Take Screenshot")]
     public void TakeScreenshot()
     {
-        RenderTexture renderTexture = new RenderTexture(width, height, 24);
+        var renderTexture = new RenderTexture(width, height, 24);
         camera.targetTexture = renderTexture;
-        Texture2D screenshot = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        var screenshot = new Texture2D(width, height, TextureFormat.RGBA32, false);
         camera.Render();
         RenderTexture.active = renderTexture;
         screenshot.ReadPixels(new Rect(0, 0, width, height), 0, 0);
