@@ -1,9 +1,8 @@
-using AfterTomorrow.Player;
 using UnityEngine;
 
-namespace AfterDestroy
+namespace AfterTomorrow
 {
-    public class Player : MonoBehaviour, IPlayer
+    public class Player : MonoBehaviour
     {
     }
 }

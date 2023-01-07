@@ -1,4 +1,5 @@
 using AfterDestroy.Inventory;
+using AfterTomorrow;
 using UnityEngine;
 using Zenject;
 
@@ -9,13 +10,17 @@ namespace Inventory
         [SerializeField] private Transform _inventoryPanel;
         [SerializeField] private Transform _inventoryContent;
         [SerializeField] private GameObject _slotPrefab;
-        
+
+        private Player _player;
         InventorySystem _inventorySystem;
         bool _isInventoryOpened;
         int _emptySlotsCount = 48;
 
         [Inject]
-        public void Construct(InventorySystem inventorySystem) => _inventorySystem = inventorySystem;
+        public void Construct(InventorySystem inventorySystem)
+        {
+            _inventorySystem = inventorySystem;
+        }
 
         public void ChangeInventoryVisibility()
         {

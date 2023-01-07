@@ -104,7 +104,10 @@ namespace AfterDestroy
             else
             {
                 _objectName.DOFade(0, _transitionTimeInSec);
-                _pointImage.SetOff();
+                if (_pointImage)
+                {
+                    _pointImage.SetOff();
+                }
             }
         }
 
