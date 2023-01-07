@@ -1,6 +1,6 @@
 using AfterDestroy.Inventory;
-using Dythervin.AutoAttach;
 using Inventory;
+using RDTools.AutoAttach;
 using UnityEngine;
 using Zenject;
 

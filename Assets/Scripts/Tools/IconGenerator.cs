@@ -1,6 +1,6 @@
 using System.IO;
-using Dythervin.AutoAttach;
-using EasyButtons;
+using RDTools;
+using RDTools.AutoAttach;
 using UnityEditor;
 using UnityEngine;
 

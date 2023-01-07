@@ -13,15 +13,6 @@ public class PlayerJump : MonoBehaviour
 
     public void JumpInput()
     {
-        try
-        {
-            throw new NullReferenceException();
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-            throw;
-        }
         if (_isJumping) return;
         StartCoroutine(JumpEvent());
     }

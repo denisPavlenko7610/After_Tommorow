@@ -1,10 +1,11 @@
-using AfterDestroy.Player;
+
+using AfterDestroy;
 using Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace AfterTomorrow.Player
+namespace AfterTomorrow
 {
     public class PlayerInput : MonoBehaviour
     {
@@ -12,7 +13,7 @@ namespace AfterTomorrow.Player
         [SerializeField] PlayerMove _playerMove;
         [SerializeField] PlayerLook _playerLook;
         [SerializeField] PlayerJump _playerJump;
-        [SerializeField] private CheckInteractable _checkInteractable;
+        [SerializeField] CheckInteractable _checkInteractable;
         
         bool _canMove = true;
         PlayerInputActions _playerInputActions;

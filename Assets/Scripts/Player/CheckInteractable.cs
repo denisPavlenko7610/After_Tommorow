@@ -5,14 +5,14 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace AfterDestroy.Player
+namespace AfterDestroy
 {
     public class CheckInteractable : MonoBehaviour
     {
         [SerializeField] Camera _playerCamera;
         [SerializeField, HideInInspector] PointImage _pointImage;
         [SerializeField] Transform _nearCameraPosition;
-        [SerializeField] AfterTomorrow.Player.PlayerInput _playerInput;
+        [SerializeField] AfterTomorrow.PlayerInput _playerInput;
         [SerializeField, HideInInspector] TextMeshProUGUI _objectName;
         [SerializeField] LayerMask _layerMask;
         [SerializeField] private float _transitionTimeInSec = 0.7f;
