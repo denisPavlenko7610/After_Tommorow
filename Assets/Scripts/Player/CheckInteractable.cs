@@ -1,9 +1,9 @@
 ﻿using AfterDestroy.Interactable;
 using AfterDestroy.UI;
 using DG.Tweening;
+using RDDependency;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace AfterDestroy
 {
@@ -15,13 +15,12 @@ namespace AfterDestroy
         [SerializeField] AfterTomorrow.PlayerInput _playerInput;
         [SerializeField, HideInInspector] TextMeshProUGUI _objectName;
         [SerializeField] LayerMask _layerMask;
-        [SerializeField] private float _transitionTimeInSec = 0.7f;
+        [SerializeField] float _transitionTimeInSec = 0.7f;
 
         [Header("Inventory settings")] Transform _selectionObject;
         Inventory.InventorySystem inventorySystem;
         Ray _ray;
         IInteractable _inetractableObject;
-        InventoryObject currentInventoryObject;
         int _countOfLeftMouseClick;
         bool _isPointImageOn;
         bool _objectInteract;
@@ -96,7 +95,7 @@ namespace AfterDestroy
                 _selectionObject = raycastHit.transform;
                 if (!_selectionObject.TryGetComponent(out InventoryObject item))
                     return;
-
+                
                 currentItemObject = item;
                 _pointImage.SetOn();
                 Interact(_selectionObject);

@@ -1,9 +1,8 @@
-
 using AfterDestroy;
 using Inventory;
+using RDDependency;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
 
 namespace AfterTomorrow
 {
@@ -13,21 +12,22 @@ namespace AfterTomorrow
         [SerializeField] PlayerMove _playerMove;
         [SerializeField] PlayerLook _playerLook;
         [SerializeField] PlayerJump _playerJump;
-        [SerializeField] CheckInteractable _checkInteractable;
+        [field:SerializeField] public CheckInteractable CheckInteractable { get; set; }
         
         bool _canMove = true;
         PlayerInputActions _playerInputActions;
         InventoryUI _inventoryUI;
 
         [Inject]
-        private void Construct(InventoryUI inventoryUI)
+        void Construct(InventoryUI inventoryUI)
         {
             _inventoryUI = inventoryUI;
         }
 
         private void OnEnable()
         {
-            _playerInputActions?.Enable();
+            _playerInputActions = new PlayerInputActions();
+            _playerInputActions.Enable();
             _playerInputActions.Player.Jump.started += Jump; 
             _playerInputActions.Player.Shift.performed += Shift; 
             _playerInputActions.Player.Shift.canceled += ShiftUp;
@@ -56,8 +56,6 @@ namespace AfterTomorrow
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-
-            _playerInputActions = new PlayerInputActions();
         }
 
         private void Update()
@@ -74,9 +72,9 @@ namespace AfterTomorrow
         {
             _canMove = isCanMove;
         }
-        private void LeftClickDown(InputAction.CallbackContext ctx) => _checkInteractable.InteractWithObject();
-        private void LeftClickUp(InputAction.CallbackContext ctx) => _checkInteractable.LeftClickUp();
-        private void RightClickDown(InputAction.CallbackContext ctx) => _checkInteractable.RightClickDown();
+        private void LeftClickDown(InputAction.CallbackContext ctx) => CheckInteractable.InteractWithObject();
+        private void LeftClickUp(InputAction.CallbackContext ctx) => CheckInteractable.LeftClickUp();
+        private void RightClickDown(InputAction.CallbackContext ctx) => CheckInteractable.RightClickDown();
         private void DisplayInventory(InputAction.CallbackContext ctx) => _inventoryUI.ChangeInventoryVisibility();
         private void Shift(InputAction.CallbackContext ctx) => _playerMove.Shift();
         private void ShiftUp(InputAction.CallbackContext ctx) => _playerMove.UnShift();

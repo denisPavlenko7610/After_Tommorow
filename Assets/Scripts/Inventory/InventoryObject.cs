@@ -1,23 +1,23 @@
 using AfterDestroy.Inventory;
 using Inventory;
+using RDDependency;
 using RDTools.AutoAttach;
 using UnityEngine;
-using Zenject;
 
 namespace AfterDestroy.Interactable
 {
     public class InventoryObject : MonoBehaviour, IInteractable
     {
-        [SerializeField] private InventoryItemData _itemData;
-        [SerializeField, Attach] private Rigidbody _rigidbody;
+        [SerializeField] InventoryItemData _itemData;
+        [SerializeField, Attach] Rigidbody _rigidbody;
 
-        private ItemInfoPanel _itemInfoPanel;
-        private InventorySystem _inventorySystem;
-        private bool _canInteract;
-        private const string GroundTag = "Ground";
+        ItemInfoPanel _itemInfoPanel;
+        InventorySystem _inventorySystem;
+        bool _canInteract;
+        const string GroundTag = "Ground";
 
         [Inject]
-        public void Construct(InventorySystem inventorySystem, ItemInfoPanel itemInfoPanel)
+        void Construct(InventorySystem inventorySystem, ItemInfoPanel itemInfoPanel)
         {
             _inventorySystem = inventorySystem;
             _itemInfoPanel = itemInfoPanel;

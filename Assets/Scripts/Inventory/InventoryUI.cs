@@ -1,7 +1,7 @@
 using AfterDestroy.Inventory;
 using AfterTomorrow;
+using RDDependency;
 using UnityEngine;
-using Zenject;
 
 namespace Inventory 
 {
@@ -17,7 +17,7 @@ namespace Inventory
         int _emptySlotsCount = 48;
 
         [Inject]
-        public void Construct(InventorySystem inventorySystem)
+        void Construct(InventorySystem inventorySystem)
         {
             _inventorySystem = inventorySystem;
         }
