@@ -1,5 +1,6 @@
 ﻿using AfterDestroy.Interactable;
 using AfterDestroy.UI;
+using AfterTomorrow.Core.RDDependency;
 using DG.Tweening;
 using RDDependency;
 using TMPro;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace AfterDestroy
 {
-    public class CheckInteractable : MonoBehaviour
+    public class CheckInteractable : DIMonoBehaviour
     {
         [SerializeField] Camera _playerCamera;
         [SerializeField, HideInInspector] PointImage _pointImage;

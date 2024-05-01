@@ -1,4 +1,5 @@
 using AfterDestroy;
+using AfterTomorrow.Core.RDDependency;
 using Inventory;
 using RDDependency;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace AfterTomorrow
 {
-    public class PlayerInput : MonoBehaviour
+    public class PlayerInput : DIMonoBehaviour
     {
         [SerializeField] bool _lookCursor = true;
         [SerializeField] PlayerMove _playerMove;
@@ -24,8 +25,10 @@ namespace AfterTomorrow
             _inventoryUI = inventoryUI;
         }
 
-        private void OnEnable()
+        public override void OnAwake()
         {
+            base.OnAwake();
+            
             _playerInputActions = new PlayerInputActions();
             _playerInputActions.Enable();
             _playerInputActions.Player.Jump.started += Jump; 
@@ -35,6 +38,17 @@ namespace AfterTomorrow
             _playerInputActions.Player.LeftClick.canceled += LeftClickUp;
             _playerInputActions.Player.RightClick.started += RightClickDown;
             _playerInputActions.Player.Inventory.started += DisplayInventory;
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            
+            if (_lookCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         private void OnDisable()
@@ -47,15 +61,6 @@ namespace AfterTomorrow
             _playerInputActions.Player.LeftClick.canceled -= LeftClickUp;
             _playerInputActions.Player.RightClick.started -= RightClickDown;
             _playerInputActions.Player.Inventory.started -= DisplayInventory;
-        }
-
-        public void Awake()
-        {
-            if (_lookCursor)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
         }
 
         private void Update()

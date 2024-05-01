@@ -1,12 +1,13 @@
+using AfterTomorrow.Core.RDDependency;
 using RDDependency;
 using UnityEngine;
 
 namespace AfterTomorrow
 {
-    public class Player : MonoBehaviour, ISetup
+    public class Player : DIMonoBehaviour
     {
         [field:SerializeField] public PlayerInput PlayerInput { get; set; }
-        public void Setup()
+        public void onStar()
         {
             
         }

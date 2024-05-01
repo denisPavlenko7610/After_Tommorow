@@ -12,7 +12,7 @@ using UnityEngine;
 namespace AfterTomorrow.Core.Installers
 {
     [DefaultExecutionOrder(-17000)]
-    public class Bootstrap : MonoBehaviour, ISetup
+    public class Bootstrap : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI _objectName;  
         [SerializeField] PointImage _pointImage;
@@ -23,6 +23,8 @@ namespace AfterTomorrow.Core.Installers
         [SerializeField] Transform _playerSpawnPosition;
 
         public List<MonoBehaviour> _objectsToInject = new List<MonoBehaviour>();
+        Provider _provider; 
+        IoCContainer _container = new IoCContainer();
 
         void OnValidate()
         {
@@ -35,45 +37,53 @@ namespace AfterTomorrow.Core.Installers
         protected void Awake()
         {
             Setup();
+            _provider.OnAwake();
         }
-        
+
+        protected void Start()
+        {
+            _provider.OnStart();
+        }
+
         [Button]
         public void FindObjectsNeedInject()
         {
-            _objectsToInject = IoCContainer.FindObjectsWithInjectAttribute();
+            _objectsToInject = _container.FindObjectsWithInjectAttribute();
         }
 
         public void Setup()
         {
-            Provider provider = gameObject.AddComponent<Provider>();
+            _provider = gameObject.AddComponent<Provider>();
+            _provider.Init(_container);
             
             RegisterUI();
             
-            IoCContainer.InjectOnScene(_objectsToInject);
+            _container.InjectOnScene(_objectsToInject);
             
-            RegisterPlayer(provider);
+            RegisterPlayer();
 
+            
             //show example of register interface to concrete object
             //IoCContainer.Register<IInventorySystem, InventorySystem>();
         }
         
         void RegisterUI()
         {
-            IoCContainer.Register<TextMeshProUGUI>(_objectName);
-            IoCContainer.Register<PointImage>(_pointImage);
-            IoCContainer.Register<InventorySystem>(_inventorySystem);
-            IoCContainer.Register<ItemInfoPanel>(_itemInfoPanel);
-            IoCContainer.Register<InventoryUI>(_inventoryUI);
+            _provider.Setup(_objectName);
+            _provider.Setup(_pointImage);
+            _provider.Setup(_inventorySystem);
+            _provider.Setup(_itemInfoPanel);
+            _provider.Setup(_inventoryUI);
         }
-        void RegisterPlayer(Provider provider)
+        void RegisterPlayer()
         {
-            Player player = provider.ProvideFactory(_playerPrefab, _playerSpawnPosition.position);
+            Player player = _provider.ProvideFactory(_playerPrefab, _playerSpawnPosition.position);
             PlayerInput playerInput = player.PlayerInput;
             CheckInteractable playerInteractable = playerInput.CheckInteractable;
             
-            IoCContainer.Register<Player>(player);
-            IoCContainer.Register<PlayerInput>(playerInput);
-            IoCContainer.Register<CheckInteractable>(playerInteractable);
+            _provider.Setup(player);
+            _provider.Setup(playerInput);
+            _provider.Setup(playerInteractable);
         }
     }
 }
