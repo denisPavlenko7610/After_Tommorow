@@ -1,7 +1,7 @@
 using AfterDestroy.Inventory;
 using Inventory;
 using RDDependency;
-using RDTools.AutoAttach;
+using RDTools;
 using UnityEngine;
 
 namespace AfterDestroy.Interactable
@@ -9,7 +9,7 @@ namespace AfterDestroy.Interactable
     public class InventoryObject : MonoBehaviour, IInteractable
     {
         [SerializeField] InventoryItemData _itemData;
-        [SerializeField, Attach] Rigidbody _rigidbody;
+        [SerializeField] Rigidbody _rigidbody;
 
         ItemInfoPanel _itemInfoPanel;
         InventorySystem _inventorySystem;

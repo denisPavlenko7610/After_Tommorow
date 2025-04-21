@@ -1,4 +1,3 @@
-using RDTools.AutoAttach;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ namespace Inventory
         [SerializeField] TextMeshProUGUI _stackSize;
         [SerializeField] TextMeshProUGUI _weight;
         [SerializeField] Image _icon;
-        [SerializeField, Attach] Transform _stackObject;
+        [SerializeField] Transform _stackObject;
 
         public void Set(InventoryItem item)
         {
